@@ -1,11 +1,17 @@
-let button = document.getElementsByClassName("btn btn-primary");
+let button = document.getElementById("btn");
 let input = document.getElementById("age");
 
 function validarEdadButton(event) {
-    if (parseInt(input.value) >= 18) {
-        console.log("Es mayor de edad");  
+    valor = parseInt(input.value);
+    if (Number.isNaN(valor) == true) {
+        console.log("Valor incorrecto");  
     } else {
-        console.log("Es menor de edad");  
+        if (Number.isInteger(valor) == true && valor >= 18) {
+           console.log("Es mayor de edad") 
+        } else {
+            console.log("Es menor de edad");   
+        }
+         
     }
 };
 
