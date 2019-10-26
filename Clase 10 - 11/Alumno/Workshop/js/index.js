@@ -37,7 +37,7 @@ function validarInputApellido(event) {
 };
 
 function validarInputDNI(event) {
-    valueDNI = parseInt(event.target.value);
+    let valueDNI = parseInt(event.target.value);
     if (Number.isNaN(valueDNI) == true || valueDNI === 0 || validarDNI(valueDNI) == true) {
        event.target.className = "form-control is-invalid";
     } else {
@@ -110,62 +110,62 @@ function agregarAlumno (event) {
 
 function eliminarAlumno(event) {
                 
-        for (let i = 0; i < listaAlumnos.length; i++) {
-            let alumnoEliminar = listaAlumnos[i];
-            if (alumnoEliminar.dni == inputDNI2.value) {
+    for (let i = 0; i < listaAlumnos.length; i++) {
+        let alumnoEliminar = listaAlumnos[i];
+        if (alumnoEliminar.dni == inputDNI2.value) {
             
-            listaAlumnos.splice(i,1);
+        listaAlumnos.splice(i,1);
             
-            let stringifiedObj = JSON.stringify(listaAlumnos);
-            localStorage.setItem("listaAlumnos",stringifiedObj);
+        let stringifiedObj = JSON.stringify(listaAlumnos);
+        localStorage.setItem("listaAlumnos",stringifiedObj);
 
-            document.getElementById("bodyTable").removeChild(document.getElementById(alumnoEliminar.dni));
+        document.getElementById("bodyTable").removeChild(document.getElementById(alumnoEliminar.dni));
                } 
             }  
         
         console.log(listaAlumnos); 
         console.log(localStorage);           
-    };
+};
 
 function getLocalStorage(key) {
         
-        let stringifiedObj = localStorage.getItem(key);
-        let parsedObj = JSON.parse(stringifiedObj);
+    let stringifiedObj = localStorage.getItem(key);
+    let parsedObj = JSON.parse(stringifiedObj);
 
-        if (parsedObj !== null) {
+    if (parsedObj !== null) {
             
-            for (let i = 0; i < parsedObj.length; i++) {
-                let alumno = parsedObj[i];
+    for (let i = 0; i < parsedObj.length; i++) {
+        let alumno = parsedObj[i];
 
-                let bodyTable = document.getElementById("bodyTable");
-                let tr = document.createElement("tr");
-                tr.id = alumno.dni;
+        let bodyTable = document.getElementById("bodyTable");
+        let tr = document.createElement("tr");
+        tr.id = alumno.dni;
             
-                let tdNombre = document.createElement("td");
-                tdNombre.innerHTML = alumno.nombre;
-                tr.appendChild(tdNombre);
+        let tdNombre = document.createElement("td");
+        tdNombre.innerHTML = alumno.nombre;
+        tr.appendChild(tdNombre);
             
-                let tdApellido = document.createElement("td");
-                tdApellido.innerHTML = alumno.apellido;
-                tr.appendChild(tdApellido);
+        let tdApellido = document.createElement("td");
+        tdApellido.innerHTML = alumno.apellido;
+        tr.appendChild(tdApellido);
             
-                let tdDNI = document.createElement("td");
-                tdDNI.innerHTML = alumno.dni;
-                tr.appendChild(tdDNI);
+        let tdDNI = document.createElement("td");
+        tdDNI.innerHTML = alumno.dni;
+        tr.appendChild(tdDNI);
             
-                let tdEmail = document.createElement("td");
-                tdEmail.innerHTML = alumno.email;
-                tr.appendChild(tdEmail);
+        let tdEmail = document.createElement("td");
+        tdEmail.innerHTML = alumno.email;
+        tr.appendChild(tdEmail);
             
-                bodyTable.appendChild(tr);
+        bodyTable.appendChild(tr);
 
-                listaAlumnos.push(alumno);
-            };
+        listaAlumnos.push(alumno);
+    };
         };
         console.log(listaAlumnos);
         console.log(localStorage);
         return;
-    };
+};
 
 function buscarAlumno(event) {
     let stringifiedObj = localStorage.getItem("listaAlumnos");
@@ -175,9 +175,9 @@ function buscarAlumno(event) {
         let alumno = parsedObj[i];
         if (alumno.nombre.toLowerCase().indexOf(inputNombre2.value.toLowerCase()) !== -1 || alumno.apellido.toLowerCase().indexOf(inputNombre2.value.toLowerCase()) !== -1) {
             console.log(alumno);
-        }
+        };
     }
-    };
+};
 
 getLocalStorage("listaAlumnos");
 
