@@ -1,24 +1,17 @@
 let listaAlumnos = [];
-
 let inputNombre = document.getElementById("input-nombre");
-
 let inputApellido = document.getElementById("input-apellido");
-
 let inputDNI = document.getElementById("input-dni");
-
 let inputDNI2 = document.getElementById("input-dni2");
-
 let inputEmail = document.getElementById("input-email");
-
 let buttonAgregar = document.getElementById("agregar-alumno");
-
 let buttonEliminar = document.getElementById("eliminar-alumno");
-
-let inputNombre2 = document.getElementById("input-nombre2")
-
+let inputNombre2 = document.getElementById("input-nombre2");
 let buttonBuscar = document.getElementById("btn-buscar");
 
-function validarInputNombre(event) {
+inputNombre.onblur =
+
+function(event) {
     let valueNombre = event.target.value;
     if (typeof valueNombre === "string" && valueNombre.length !== 0) {
         event.target.className = "form-control is-valid";
@@ -27,7 +20,9 @@ function validarInputNombre(event) {
     }
 };
 
-function validarInputApellido(event) {
+inputApellido.onblur =
+
+function(event) {
     let valueApellido = event.target.value;
     if (typeof valueApellido === "string" && valueApellido.length !== 0) {
         event.target.className = "form-control is-valid";
@@ -36,7 +31,9 @@ function validarInputApellido(event) {
     }
 };
 
-function validarInputDNI(event) {
+inputDNI.onblur =
+
+function(event) {
     let valueDNI = parseInt(event.target.value);
     if (Number.isNaN(valueDNI) == true || valueDNI === 0 || validarDNI(valueDNI) == true) {
        event.target.className = "form-control is-invalid";
@@ -58,7 +55,9 @@ function validarDNI(dni) {
     return false;
 };
 
-function validarInputEmail(event) {
+inputEmail.onblur =
+
+function(event) {
     let valueEmail = event.target.value;
     if (valueEmail.indexOf("@") !== -1 && valueEmail.indexOf(".") !== -1) {
         event.target.className = "form-control is-valid";
@@ -67,7 +66,9 @@ function validarInputEmail(event) {
     }
 };
 
-function agregarAlumno (event) {
+buttonAgregar.onclick =
+
+function(event) {
     if (inputNombre.className === "form-control is-valid" && inputDNI.className === "form-control is-valid" && inputEmail.className === "form-control is-valid") {
         let nuevoAlumno = {
             nombre: inputNombre.value,
@@ -108,7 +109,9 @@ function agregarAlumno (event) {
     }   
 };
 
-function eliminarAlumno(event) {
+buttonEliminar.onclick =
+
+function(event) {
                 
     for (let i = 0; i < listaAlumnos.length; i++) {
         let alumnoEliminar = listaAlumnos[i];
@@ -167,7 +170,9 @@ function getLocalStorage(key) {
         return;
 };
 
-function buscarAlumno(event) {
+buttonBuscar.onclick =
+
+function(event) {
     let stringifiedObj = localStorage.getItem("listaAlumnos");
     let parsedObj = JSON.parse(stringifiedObj);
     
@@ -180,20 +185,6 @@ function buscarAlumno(event) {
 };
 
 getLocalStorage("listaAlumnos");
-
-inputNombre.onblur = validarInputNombre;
-
-inputApellido.onblur = validarInputApellido;
-
-inputDNI.onblur = validarInputDNI;
-
-inputEmail.onblur = validarInputEmail;
-
-buttonAgregar.onclick = agregarAlumno;
-
-buttonEliminar.onclick = eliminarAlumno;
-
-buttonBuscar.onclick = buscarAlumno;
 
 
 

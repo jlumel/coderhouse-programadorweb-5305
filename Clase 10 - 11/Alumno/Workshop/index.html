@@ -9,88 +9,84 @@
     <title>WorkShop</title>
 </head>
 <body>
-
-        <div class="jumbotron">
-                <h1 class="display-4">Workshop</h1>
-                <p class="lead">Lista de Alumnos</p>
-                <hr class="my-4">
-              </div>
+    <div class="jumbotron">
+        <h1 class="display-4">Workshop</h1>
+        <p class="lead">Lista de Alumnos</p>
+        <hr class="my-4">
+    </div>
 
    <div class="container">
-       <div class="row">
-           <div class="col">
-                <table class="table">
-                        <thead>
-                            <tr>
-                             <th>Nombre</th>
-                             <th>Apellido</th>
-                             <th>DNI</th>
-                             <th>E-mail</th>
-                             </tr>
-                        </thead>
-                        <tbody id="bodyTable">
-         
-                        </tbody>
-                    </table>
-           </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                        <th>E-mail</th>
+                            </tr>
+                </thead>
+                <tbody id="bodyTable">
+                </tbody>
+            </table>
+        </div>
         
-           
-           <div class="col">
-               <form action="#">
+        <div class="col">
+            <form action="#">
 
-                <div class="form-row">
+            <div class="form-row">
                     
-                    <div class="col">
-                      <input type="text" class="form-control" id="input-nombre" placeholder ="Nombre"/>
-                    </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="input-nombre" placeholder ="Nombre"/>
+                </div>
 
-                    <div class="col">
-                        <input type="text" class="form-control" id="input-apellido" placeholder ="Apellido"/>
-                    </div> 
+                <div class="col">
+                    <input type="text" class="form-control" id="input-apellido" placeholder ="Apellido"/>
+                </div> 
 
                 </div>
 
-                    <div class="form-row">
-                        <div class="col">
-                                <input type="text" class="form-control" id="input-dni" placeholder ="DNI"/>
-                        </div>
-                                <div class="col">
-                                        <input type="text" class="form-control" id="input-email" placeholder ="E-mail"/>
-                                </div> 
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="input-dni" placeholder ="DNI"/>
                     </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="input-email" placeholder ="E-mail"/>
+                    </div> 
+                </div>
                         
                 <div class="form-row">
                     <div class="col">
-                            <button class="btn btn-outline-primary btn-block" id="agregar-alumno">
-                                    Agregar alumno
-                            </button> 
+                        <button class="btn btn-outline-primary btn-block" id="agregar-alumno">
+                            Agregar alumno
+                        </button> 
                     </div>
                 </div>
 
-
                 <div class="form-row">
-                        <div class="col">
-                                <input type="text" class="form-control" id="input-dni2" placeholder ="DNI"/>
-                              </div>
-                          <div class="col">
-                                <button class="btn btn-outline-danger btn-block" id="eliminar-alumno">
-                                        Eliminar alumno
-                                    </button> 
-                              </div>        
+                    <div class="col">
+                        <input type="text" class="form-control" id="input-dni2" placeholder ="DNI"/>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-danger btn-block" id="eliminar-alumno">
+                            Eliminar alumno
+                        </button> 
+                    </div>        
                 </div>
                 <div class="form-row">
-                        <div class="col">
-                                <input type="text" class="form-control" id="input-nombre2" placeholder ="Nombre"/>
-                              </div>
-                          <div class="col">
-                                <button class="btn btn-outline-success btn-block" id="btn-buscar">
-                                        Buscar alumno
-                                    </button> 
-                              </div>        
+                    <div class="col">
+                        <input type="text" class="form-control" id="input-nombre2" placeholder ="Nombre"/>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-success btn-block" id="btn-buscar">
+                            Buscar alumno
+                        </button> 
+                    </div>        
                 </div>
-               </form>
-            </div>
+            </form>
         </div>
+    </div>
    </div>
    <script src= "js/index.js"></script>
 </body>
