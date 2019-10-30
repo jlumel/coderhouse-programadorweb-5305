@@ -9,6 +9,8 @@ let buttonEliminar = document.getElementById("eliminar-alumno");
 let inputNombre2 = document.getElementById("input-nombre2");
 let buttonBuscar = document.getElementById("btn-buscar");
 
+getLocalStorage("listaAlumnos");
+
 inputNombre.onblur =
 
 function(event) {
@@ -48,7 +50,7 @@ function validarDNI(dni) {
     }
     for (let i = 0; i < listaAlumnos.length; i++) {
         let alumno = listaAlumnos[i];
-        if (alumno.dni == dni) {
+        if (alumno.dni === dni.toString()) {
             return true;
         }
     }
@@ -66,6 +68,33 @@ function(event) {
     }
 };
 
+function validarLocalStorage(key,alumnoBuscar) {
+    
+    let stringifiedObj = localStorage.getItem(key,listaAlumnos);
+    let parsedObj = JSON.parse(stringifiedObj);
+
+    if (parsedObj !== null) {
+        for (let i = 0; i < parsedObj.length; i++) {
+            let alumno = parsedObj[i];
+            if (alumno == alumnoBuscar) {
+                return false
+            }
+        }
+        return true
+    }
+    return true
+}
+
+buttonAgregar.onblur=
+
+function(event) {
+    if (inputNombre.className !== "form-control is-valid" || inputDNI.className !== "form-control is-valid" || inputEmail.className !== "form-control is-valid") {
+       event.target.className = "btn btn-outline-primary btn-block disabled" 
+    } else {
+        event.target.className = "btn btn-outline-primary btn-block"
+    }
+}
+
 buttonAgregar.onclick =
 
 function(event) {
@@ -76,7 +105,8 @@ function(event) {
             dni: inputDNI.value,
             email: inputEmail.value
         };
-    
+        if (validarLocalStorage("listaAlumnos",nuevoAlumno) == true) {
+        
         listaAlumnos.push(nuevoAlumno);
     
         let bodyTable = document.getElementById("bodyTable");
@@ -106,28 +136,42 @@ function(event) {
 
         console.log(listaAlumnos);
         console.log(localStorage);
+        }
     }   
 };
 
 buttonEliminar.onclick =
 
 function(event) {
-                
+
     for (let i = 0; i < listaAlumnos.length; i++) {
         let alumnoEliminar = listaAlumnos[i];
         if (alumnoEliminar.dni == inputDNI2.value) {
-            
+                
         listaAlumnos.splice(i,1);
-            
-        let stringifiedObj = JSON.stringify(listaAlumnos);
-        localStorage.setItem("listaAlumnos",stringifiedObj);
-
-        document.getElementById("bodyTable").removeChild(document.getElementById(alumnoEliminar.dni));
-               } 
-            }  
         
-        console.log(listaAlumnos); 
-        console.log(localStorage);           
+        if (listaAlumnos === []) {
+            localStorage.removeItem("listaAlumnos")
+        } else {
+            let stringifiedObj = JSON.stringify(listaAlumnos);
+            localStorage.setItem("listaAlumnos",stringifiedObj);
+            }
+    
+        let bodyTable = document.getElementById("bodyTable")
+        let col2 = document.getElementById("col2")
+    
+            bodyTable.removeChild(document.getElementById(alumnoEliminar.dni));
+            col2.removeChild(document.getElementById(alumnoEliminar.nombre));
+            col2.removeChild(document.getElementById(alumnoEliminar.apellido));
+            col2.removeChild(document.getElementById(alumnoEliminar.dni));
+            col2.removeChild(document.getElementById(alumnoEliminar.email));
+            } 
+        }  
+            console.log(alumnoEliminar)
+            console.log(listaAlumnos); 
+            console.log(localStorage);
+          
+               
 };
 
 function getLocalStorage(key) {
@@ -167,27 +211,34 @@ function getLocalStorage(key) {
         };
         console.log(listaAlumnos);
         console.log(localStorage);
-        return;
 };
 
 buttonBuscar.onclick =
 
 function(event) {
-    let stringifiedObj = localStorage.getItem("listaAlumnos");
-    let parsedObj = JSON.parse(stringifiedObj);
-    
-    for (let i = 0; i < parsedObj.length; i++) {
-        let alumno = parsedObj[i];
+       
+    for (let i = 0; i < listaAlumnos.length; i++) {
+        let alumno = listaAlumnos[i];
         if (alumno.nombre.toLowerCase().indexOf(inputNombre2.value.toLowerCase()) !== -1 || alumno.apellido.toLowerCase().indexOf(inputNombre2.value.toLowerCase()) !== -1) {
-            console.log(alumno);
+            
+            let col2 = document.getElementById("col2");
+            let nombre = document.createElement("h2");
+            nombre.id = alumno.dni;
+            nombre.innerHTML = alumno.nombre;
+            let apellido = document.createElement("h2");
+            apellido.id = alumno.apellido;
+            apellido.innerHTML = alumno.apellido;
+            let dni = document.createElement("p");
+            dni.id = alumno.dni;
+            dni.innerHTML = "DNI:" + " " + alumno.dni;
+            let email = document.createElement("p");
+            email.id = alumno.email;
+            email.innerHTML = "Email:" + " " + alumno.email;
+
+            col2.appendChild(nombre);
+            col2.appendChild(apellido);
+            col2.appendChild(dni);
+            col2.appendChild(email);
         };
     }
 };
-
-getLocalStorage("listaAlumnos");
-
-
-
-
-
-
