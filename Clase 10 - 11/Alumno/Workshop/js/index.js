@@ -11,18 +11,27 @@ let buttonBuscar = document.getElementById("btn-buscar");
 
 getLocalStorage("listaAlumnos");
 
-inputNombre.onblur =
+inputNombre.oninput =
 
 function(event) {
     let valueNombre = event.target.value;
-    if (typeof valueNombre === "string" && valueNombre.length !== 0) {
-        event.target.className = "form-control is-valid";
+    if (valueNombre.length !== 0) {
+        if (typeof valueNombre === "string") {
+        event.target.className = "form-control is-valid";   
+        } else {
+        event.target.className = "form-control is-invalid";  
+        }
+        } else {
+        event.target.className = "form-control";  
+    }
+    if (inputNombre.className === "form-control is-valid" && inputDNI.className === "form-control is-valid" && inputEmail.className === "form-control is-valid") {
+        buttonAgregar.disabled = false;
     } else {
-        event.target.className = "form-control is-invalid";
+        buttonAgregar.disabled = true;
     }
 };
 
-inputApellido.onblur =
+inputApellido.oninput =
 
 function(event) {
     let valueApellido = event.target.value;
@@ -33,14 +42,23 @@ function(event) {
     }
 };
 
-inputDNI.onblur =
+inputDNI.oninput =
 
 function(event) {
     let valueDNI = parseInt(event.target.value);
-    if (Number.isNaN(valueDNI) == true || valueDNI === 0 || validarDNI(valueDNI) == true) {
-       event.target.className = "form-control is-invalid";
+    if (event.target.value.length !== 0) {
+        if (Number.isNaN(valueDNI) === true || valueDNI === 0 || validarDNI(valueDNI) == true) {
+        event.target.className = "form-control is-invalid";  
+        } else {
+        event.target.className = "form-control is-valid";   
+        }
+        } else {
+        event.target.className = "form-control";
+    }
+    if (inputNombre.className === "form-control is-valid" && inputDNI.className === "form-control is-valid" && inputEmail.className === "form-control is-valid") {
+        buttonAgregar.disabled = false;
     } else {
-       event.target.className = "form-control is-valid";
+        buttonAgregar.disabled = true;
     }
 };
 
@@ -57,14 +75,24 @@ function validarDNI(dni) {
     return false;
 };
 
-inputEmail.onblur =
+inputEmail.oninput =
 
 function(event) {
     let valueEmail = event.target.value;
+    if (valueEmail.length !== 0) {
     if (valueEmail.indexOf("@") !== -1 && valueEmail.indexOf(".") !== -1) {
         event.target.className = "form-control is-valid";
     } else {
         event.target.className = "form-control is-invalid";
+    }    
+    } else {
+        event.target.className = "form-control";  
+    }
+    
+    if (inputNombre.className === "form-control is-valid" && inputDNI.className === "form-control is-valid" && inputEmail.className === "form-control is-valid") {
+        buttonAgregar.disabled = false;
+    } else {
+        buttonAgregar.disabled = true;
     }
 };
 
@@ -76,23 +104,13 @@ function validarLocalStorage(key,alumnoBuscar) {
     if (parsedObj !== null) {
         for (let i = 0; i < parsedObj.length; i++) {
             let alumno = parsedObj[i];
-            if (alumno == alumnoBuscar) {
+            if (alumno.dni === alumnoBuscar.dni) {
                 return false
             }
         }
         return true
     }
     return true
-}
-
-buttonAgregar.onblur=
-
-function(event) {
-    if (inputNombre.className !== "form-control is-valid" || inputDNI.className !== "form-control is-valid" || inputEmail.className !== "form-control is-valid") {
-       event.target.className = "btn btn-outline-primary btn-block disabled" 
-    } else {
-        event.target.className = "btn btn-outline-primary btn-block"
-    }
 }
 
 buttonAgregar.onclick =
@@ -105,7 +123,7 @@ function(event) {
             dni: inputDNI.value,
             email: inputEmail.value
         };
-        if (validarLocalStorage("listaAlumnos",nuevoAlumno) == true) {
+        if (validarLocalStorage("listaAlumnos",nuevoAlumno) === true) {
         
         listaAlumnos.push(nuevoAlumno);
     
@@ -133,12 +151,20 @@ function(event) {
     
         stringifiedObj = JSON.stringify(listaAlumnos);
         localStorage.setItem("listaAlumnos",stringifiedObj);
-
-        console.log(listaAlumnos);
-        console.log(localStorage);
         }
     }   
 };
+
+inputDNI2.oninput =
+
+function(event) {
+    let valueDNI = parseInt(event.target.value);
+    if (Number.isNaN(valueDNI) === true || valueDNI === 0 || validarDNI(valueDNI) == false) {
+       buttonEliminar.disabled = true
+    } else {
+        buttonEliminar.disabled = false
+    }
+}
 
 buttonEliminar.onclick =
 
@@ -149,29 +175,25 @@ function(event) {
         if (alumnoEliminar.dni == inputDNI2.value) {
                 
         listaAlumnos.splice(i,1);
-        
-        if (listaAlumnos === []) {
+                
+        if (listaAlumnos.length === 0) {
             localStorage.removeItem("listaAlumnos")
         } else {
             let stringifiedObj = JSON.stringify(listaAlumnos);
             localStorage.setItem("listaAlumnos",stringifiedObj);
             }
     
-        let bodyTable = document.getElementById("bodyTable")
-        let col2 = document.getElementById("col2")
+        let bodyTable = document.getElementById("bodyTable");
+        let col2 = document.getElementById("col2");
+        let table = document.getElementById("table");
     
-            bodyTable.removeChild(document.getElementById(alumnoEliminar.dni));
-            col2.removeChild(document.getElementById(alumnoEliminar.nombre));
-            col2.removeChild(document.getElementById(alumnoEliminar.apellido));
-            col2.removeChild(document.getElementById(alumnoEliminar.dni));
-            col2.removeChild(document.getElementById(alumnoEliminar.email));
-            } 
-        }  
-            console.log(alumnoEliminar)
-            console.log(listaAlumnos); 
-            console.log(localStorage);
-          
-               
+        bodyTable.removeChild(document.getElementById(alumnoEliminar.dni));
+            
+        if (table !== null) {
+            col2.removeChild(table); 
+        }
+        } 
+    }          
 };
 
 function getLocalStorage(key) {
@@ -208,37 +230,49 @@ function getLocalStorage(key) {
 
         listaAlumnos.push(alumno);
     };
-        };
+    };
         console.log(listaAlumnos);
         console.log(localStorage);
 };
 
+inputNombre2.oninput =
+
+function(event) {
+    if (typeof event.target.value === "string" && event.target.value.length !== 0) {
+       buttonBuscar.disabled = false
+    } else {
+        buttonBuscar.disabled = true
+    }
+}
+
 buttonBuscar.onclick =
 
 function(event) {
-       
+    let col2 = document.getElementById("col2")
+    let tableValidar = document.getElementById("table")
+            if (tableValidar !== null) {
+                col2.removeChild(tableValidar); 
+            }
     for (let i = 0; i < listaAlumnos.length; i++) {
         let alumno = listaAlumnos[i];
         if (alumno.nombre.toLowerCase().indexOf(inputNombre2.value.toLowerCase()) !== -1 || alumno.apellido.toLowerCase().indexOf(inputNombre2.value.toLowerCase()) !== -1) {
             
-            let col2 = document.getElementById("col2");
+            let table = document.createElement("table");
+            table.id = "table";
             let nombre = document.createElement("h2");
-            nombre.id = alumno.dni;
             nombre.innerHTML = alumno.nombre;
             let apellido = document.createElement("h2");
-            apellido.id = alumno.apellido;
             apellido.innerHTML = alumno.apellido;
             let dni = document.createElement("p");
-            dni.id = alumno.dni;
             dni.innerHTML = "DNI:" + " " + alumno.dni;
             let email = document.createElement("p");
-            email.id = alumno.email;
             email.innerHTML = "Email:" + " " + alumno.email;
 
-            col2.appendChild(nombre);
-            col2.appendChild(apellido);
-            col2.appendChild(dni);
-            col2.appendChild(email);
+            table.appendChild(nombre);
+            table.appendChild(apellido);
+            table.appendChild(dni);
+            table.appendChild(email);
+            col2.appendChild(table);
         };
     }
 };
