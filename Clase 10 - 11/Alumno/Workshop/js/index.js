@@ -16,7 +16,7 @@ inputNombre.oninput =
 function(event) {
     let valueNombre = event.target.value;
     if (valueNombre.length !== 0) {
-        if (Number.isNaN(parseInt(valueNombre)) === true) {
+        if (isNaN(valueNombre) === true) {
         event.target.className = "form-control is-valid";   
         } else {
         event.target.className = "form-control is-invalid";  
@@ -35,8 +35,12 @@ inputApellido.oninput =
 
 function(event) {
     let valueApellido = event.target.value;
-    if (Number.isNaN(parseInt(valueApellido)) === true && valueApellido.length !== 0) {
-        event.target.className = "form-control is-valid";
+    if (valueApellido.length !== 0) {
+        if (isNaN(valueApellido) === true) {
+            event.target.className = "form-control is-valid" 
+        } else {
+            event.target.className = "form-control is-invalid";  
+        }
     } else {
         event.target.className = "form-control";
     }
@@ -45,9 +49,9 @@ function(event) {
 inputDNI.oninput =
 
 function(event) {
-    let valueDNI = parseInt(event.target.value);
-    if (event.target.value.length !== 0) {
-        if (Number.isNaN(valueDNI) === true || valueDNI === 0 || validarDNI(valueDNI) == true) {
+    let valueDNI = event.target.value;
+    if (valueDNI.length !== 0) {
+        if (isNaN(valueDNI) === true || parseInt(valueDNI) === 0 || validarDNI(parseInt(valueDNI)) === true) {
         event.target.className = "form-control is-invalid";  
         } else {
         event.target.className = "form-control is-valid";   
@@ -96,14 +100,11 @@ function(event) {
     }
 };
 
-function validarLocalStorage(key,alumnoBuscar) {
+function validarListaAlumnos(alumnoBuscar) {
     
-    let stringifiedObj = localStorage.getItem(key,listaAlumnos);
-    let parsedObj = JSON.parse(stringifiedObj);
-
-    if (parsedObj !== null) {
-        for (let i = 0; i < parsedObj.length; i++) {
-            let alumno = parsedObj[i];
+    if (listaAlumnos.length !== 0) {
+        for (let i = 0; i < listaAlumnos.length; i++) {
+            let alumno = listaAlumnos[i];
             if (alumno.dni === alumnoBuscar.dni) {
                 return false
             }
@@ -123,7 +124,7 @@ function(event) {
             dni: inputDNI.value,
             email: inputEmail.value
         };
-        if (validarLocalStorage("listaAlumnos",nuevoAlumno) === true) {
+        if (validarListaAlumnos(nuevoAlumno) === true) {
         
         listaAlumnos.push(nuevoAlumno);
     
@@ -151,6 +152,11 @@ function(event) {
     
         stringifiedObj = JSON.stringify(listaAlumnos);
         localStorage.setItem("listaAlumnos",stringifiedObj);
+
+        inputNombre.value = null
+        inputApellido.value = null
+        inputDNI.value = null
+        inputEmail.value = null
         }
     }   
 };
@@ -158,8 +164,8 @@ function(event) {
 inputDNI2.oninput =
 
 function(event) {
-    let valueDNI = parseInt(event.target.value);
-    if (Number.isNaN(valueDNI) === true || valueDNI === 0 || validarDNI(valueDNI) == false) {
+    let valueDNI = event.target.value;
+    if (isNaN(valueDNI) === true || parseInt(valueDNI) === 0 || validarDNI(parseInt(valueDNI)) === false) {
        buttonEliminar.disabled = true
     } else {
         buttonEliminar.disabled = false
@@ -239,7 +245,7 @@ inputNombre2.oninput =
 
 function(event) {
     let valueNombre = event.target.value
-    if (Number.isNaN(parseInt(valueNombre)) === true && valueNombre.length !== 0) {
+    if (isNaN(valueNombre) === true && valueNombre.length !== 0) {
        buttonBuscar.disabled = false
     } else {
         buttonBuscar.disabled = true
