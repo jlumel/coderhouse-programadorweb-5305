@@ -16,7 +16,7 @@ inputNombre.oninput =
 function(event) {
     let valueNombre = event.target.value;
     if (valueNombre.length !== 0) {
-        if (typeof valueNombre === "string") {
+        if (Number.isNaN(parseInt(valueNombre)) === true) {
         event.target.className = "form-control is-valid";   
         } else {
         event.target.className = "form-control is-invalid";  
@@ -35,7 +35,7 @@ inputApellido.oninput =
 
 function(event) {
     let valueApellido = event.target.value;
-    if (typeof valueApellido === "string" && valueApellido.length !== 0) {
+    if (Number.isNaN(parseInt(valueApellido)) === true && valueApellido.length !== 0) {
         event.target.className = "form-control is-valid";
     } else {
         event.target.className = "form-control";
@@ -238,7 +238,8 @@ function getLocalStorage(key) {
 inputNombre2.oninput =
 
 function(event) {
-    if (typeof event.target.value === "string" && event.target.value.length !== 0) {
+    let valueNombre = event.target.value
+    if (Number.isNaN(parseInt(valueNombre)) === true && valueNombre.length !== 0) {
        buttonBuscar.disabled = false
     } else {
         buttonBuscar.disabled = true
