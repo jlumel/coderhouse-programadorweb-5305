@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+}
+
+.container-box {
+  display: block;
+  width: auto;
+  margin: 0 auto;
+}
+
+.box {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 0.5em;
+  background-size: cover;
+}
+
+.circle,
+.cross {
+  background-image: url('../images/tic.png');
+}
+
+.cross {
+  background-position: 100%;
+}
