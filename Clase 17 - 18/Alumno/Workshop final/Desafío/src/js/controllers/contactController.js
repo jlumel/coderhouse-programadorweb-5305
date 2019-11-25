@@ -1,11 +1,10 @@
 function contactController() {
     console.log('Se cargo Contacto');
-  }
 
-let nombre = $("#firstName")
-let email = $("#email")
-let comment = $("#comments")
-let boton = $("#submitButton")
+    let nombre = $("#firstName")
+    let email = $("#email")
+    let comment = $("#comments")
+    let boton = $("#submitButton")
 
 function habilitarBtn() {
     if (nombre.hasClass("is-valid") === true && email.hasClass("is-valid") === true && comment.hasClass("is-valid") === true) {
@@ -54,15 +53,15 @@ comment.on('blur', function() {
             inputComment.removeClass("is-invalid")
         }
         inputComment.addClass("is-valid")
-        $("#submitButton").disabled = true
     } else {
         if (inputComment.hasClass("is-valid")) {
             inputComment.removeClass("is-valid")
         }
-        inputComment.addClass("is-invalid") 
-        $("#submitButton").disabled = false
+        inputComment.addClass("is-invalid")
     }
     habilitarBtn() 
 })
-  
+
+  }
+
   export default contactController;
