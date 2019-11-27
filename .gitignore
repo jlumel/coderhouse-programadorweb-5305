@@ -2,7 +2,9 @@
 
 .DS_Store
 /**/.DS_Store
-/Clase 17 - 18/Alumno/Workshop final/Desafío/node_modules
+/node_modules
+/**/node_modules
+**/**/node_modules
 
 # /Clase 09/Profe/Desafío
 # /Clase 09/Profe/Ejercicio
