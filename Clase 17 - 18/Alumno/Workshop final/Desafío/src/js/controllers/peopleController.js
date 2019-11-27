@@ -1,7 +1,12 @@
 import {setLocalList} from '../utils/localStorage'
 import {getLocalList} from '../utils/localStorage'
-let parsedList = getLocalList("listaPersonajes")
-function validarLista(buscar) {
+
+
+function peopleController() {
+    console.log('Se cargo Personajes');
+
+    let parsedList = getLocalList("listaPersonajes")
+    function validarLista(buscar) {
     
     if (parsedList.length !== 0) {
         for (let i = 0; i < parsedList.length; i++) {
@@ -14,9 +19,6 @@ function validarLista(buscar) {
     }
     return true
 }
-
-function peopleController() {
-    console.log('Se cargo Personajes');
     let index = 1
     let pagina = 2
 function getData(page) {
@@ -118,8 +120,10 @@ function getData(page) {
     
         index++
     }
-    
+
     }
+
+
 
     $(".btn").click(function() {
         let boton = $(this)
@@ -156,6 +160,29 @@ $("#seeMore").click(function() {
     if (pagina === 10) {
     $(this).attr("disabled", true)   
     } 
+})
+
+$("#inputBuscar").blur(function() {
+    let input = $(this)
+    let tbody = $("#tableBody")
+    let tr = tbody.children()
+    if (input.val().length !== 0) {
+        for (let i = 0; i < tr.length; i++) {
+            if ($(tr[i]).children()[1].innerHTML.toLowerCase() !== input.val().toLowerCase()) {
+                $(tr[i]).remove()
+            } 
+        }
+    } else {
+        if (tr === null) {
+            index = 1
+            getData(1)  
+        } else {
+            tr.remove()
+            index = 1
+            getData(1)
+        }
+        
+    }
 })
 
 }
