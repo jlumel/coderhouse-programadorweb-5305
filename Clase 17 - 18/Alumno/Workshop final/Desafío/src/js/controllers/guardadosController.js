@@ -51,6 +51,49 @@ function guardadosController() {
   }
 }
 })
+
+$("#inputBuscar").blur(function() {
+  let input = $(this)
+  let tbody = $("#tableBody")
+  let tr = tbody.children()
+  if (input.val().length !== 0) {
+      for (let i = 0; i < tr.length; i++) {
+          if ($(tr[i]).children()[1].innerHTML.toLowerCase() !== input.val().toLowerCase()) {
+              $(tr[i]).remove()
+          } 
+      }
+  } else {
+      if (tr === null) {
+          index = 1
+          for (let i = 0; i < parsedList.length; i++) {
+            const personaje = parsedList[i];
+            
+          
+            let tbody = $("#tableBody")    
+              tbody.append('<tr><td>' + index + '</td><td>' + personaje.name + '</td><td>' + personaje.gender + '</td><td>' + personaje.height + '</td><td>' + personaje.mass + '</td><td>' + personaje.eye_color + '</td><td><button class="btn btn-danger">Eliminar</button></td></tr>')
+              let tr2 = tbody.children()
+              tr2.attr("style", "overflow: hidden;")
+          
+              index++
+          } 
+      } else {
+          tr.remove()
+          index = 1
+          for (let i = 0; i < parsedList.length; i++) {
+            const personaje = parsedList[i];
+            
+          
+            let tbody = $("#tableBody")    
+              tbody.append('<tr><td>' + index + '</td><td>' + personaje.name + '</td><td>' + personaje.gender + '</td><td>' + personaje.height + '</td><td>' + personaje.mass + '</td><td>' + personaje.eye_color + '</td><td><button class="btn btn-danger">Eliminar</button></td></tr>')
+              let tr2 = tbody.children()
+              tr2.attr("style", "overflow: hidden;")
+          
+              index++
+          }
+      }
+      
+  }
+})
   }
 
   
