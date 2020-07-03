@@ -23,7 +23,7 @@ function peopleController() {
     let pagina = 2
 function getData(page) {
     var request = $.ajax({
-        url: "https://swapi.co/api/people/?page=" + page,
+        url: "https://swapi.dev/api/people/?page=" + page,
         method: "GET"
       })
       

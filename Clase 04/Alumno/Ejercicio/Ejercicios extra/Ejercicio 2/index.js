@@ -1,13 +1,19 @@
 let misNumeros = 0;
 let miPrompt;
+let miPromptParsed
 function suma(valor) {
   console.log(valor)
- }
-do {
+}
+while (miPrompt !== 'exit') {
 
-miPrompt = parseInt(prompt("Ingrese un numero"));
-misNumeros = miPrompt + misNumeros;
- 
-} while (miPrompt !== 0)
+  miPrompt = prompt("Ingrese un numero");
+  if (miPrompt === "exit") {
+    break
+  } 
+    
+  miPromptParsed = parseInt(miPrompt)
+  misNumeros = miPromptParsed + misNumeros;
+
+}
 
 suma(misNumeros);

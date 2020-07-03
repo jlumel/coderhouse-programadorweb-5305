@@ -238,6 +238,7 @@ function getLocalStorage(key) {
     };
     };
         console.log(listaAlumnos);
+        console.table(listaAlumnos);
         console.log(localStorage);
 };
 
